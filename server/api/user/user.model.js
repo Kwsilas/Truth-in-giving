@@ -4,10 +4,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
+var Store = require('../store/store.model');
 
 var UserSchema = new Schema({
   name: String,
   email: { type: String, lowercase: true },
+  stores: [Store.schema],
   role: {
     type: String,
     default: 'user'

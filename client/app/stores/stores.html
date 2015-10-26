@@ -3,11 +3,15 @@
 <div class="container">
   <div class="col-md-12">
   <h3>Where I shop</h3>
-  <ul>
-    <li></li>
+  <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="store in stores">
+      <li><a href="#">{{store.name}}<button type="button" class="close" ng-click="remove(store)">&times;</button></a></li>
   </ul>
   </div>
 
-  <form class="store-form">
+  <form ng-submit="add()">
+    Store:<input type="text" ng-model="Store.name" /><br/>
+    Purchase Amount:<input type="number" ng-model="Store.amount" /><br/>
+    Giving % :<input type="number" ng-model="Store.giving" /><br/>
+    <button type="submit" class="btn btn-primary" ng-click="addStore()">Add New</button>
   </from>
 </div>
