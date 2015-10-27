@@ -4,14 +4,14 @@
   <div class="col-md-12">
   <h3>Where I shop</h3>
   <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="store in stores">
-      <li><a href="#">{{store.name}}<button type="button" class="close" ng-click="remove(store)">&times;</button></a></li>
+      <li tooltip="{{store.info}}">Store:{{store.name}}  Purchase ${{store.amount}}  Giving %{{store.giving}}<button type="button" class="close" ng-click="remove(store)">&times;</button></li>
   </ul>
   </div>
 
-  <form ng-submit="add()">
-    Store:<input type="text" ng-model="Store.name" /><br/>
-    Purchase Amount:<input type="number" ng-model="Store.amount" /><br/>
-    Giving % :<input type="number" ng-model="Store.giving" /><br/>
-    <button type="submit" class="btn btn-primary" ng-click="addStore()">Add New</button>
-  </from>
+  <form>
+    Store:<input type="text" ng-model="newStoreName" /><br/>
+    Purchase Amount:<input type="number" ng-model="newStoreAmount" /><br/>
+    Giving % :<input type="number" ng-model="newStoreGiving" /><br/>
+    <button type="submit" class="btn btn-primary" ng-click="add()">Add New</button>
+  </form>
 </div>

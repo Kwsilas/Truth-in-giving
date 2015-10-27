@@ -11,15 +11,15 @@ angular.module('truthInGivingApp')
 
     self.add = function(store) {
       console.log('adding:', JSON.stringify(store));
-      return $http.post('/api/stores/', { store: store });
+      return $http.post('/api/stores', store);
     };
 
     self.get = function(store) {
-      return $http.get('/ai/stores/' + store._id);
+      return $http.get('/api/stores/' + store._id);
     };
 
     self.update = function(store) {
-      return $http.put('/api/stores/' + store._id, { store: store });
+      return $http.put('/api/stores/' + store._id, store);
     };
 
     self.remove = function(store) {

@@ -24,6 +24,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Store.create(req.body, function(err, store) {
     if(err) { return handleError(res, err); }
+    console.log(store);
     return res.status(201).json(store);
   });
 };

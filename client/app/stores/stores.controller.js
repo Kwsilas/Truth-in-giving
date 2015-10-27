@@ -12,8 +12,9 @@ angular.module('truthInGivingApp')
     };
 
     $scope.add = function() {
-      var store = { name: $scope.newStoreName, completed: false };
+      var store = { name: $scope.newStoreName, amount: $scope.newStoreAmount, giving: $scope.newStoreGiving };
       storesService.add(store).then(function(response) {
+        console.log(store);
         $scope.newStoreName = '';
         $scope.getAll();
       });
