@@ -2,41 +2,58 @@
 
 var _ = require('lodash');
 var Store = require('./store.model');
+var User = require('../user/user.model');
+
+function findStoreById(user, id) {
+  return _.find(user.stores, function(store) {
+    return store._id.equals(id);
+  });
+};
 
 // Get list of stores
 exports.index = function(req, res) {
-  Store.find(function (err, stores) {
+  var userId = req.user._id;
+  User.findById(userId, function(err, user) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(stores);
+    return res.status(200).json(user.stores);
   });
 };
 
 // Get a single store
 exports.show = function(req, res) {
-  Store.findById(req.params.id, function (err, store) {
-    if(err) { return handleError(res, err); }
-    if(!store) { return res.status(404).send('Not Found'); }
-    return res.json(store);
+  User.findById(req.user._id, function(err, user){
+    if (err) { return handleError(res, err); }
+    if (!user) { return res.status(404).send('Not Found'); }
+    var store = findStoreById(user, req.params.id);
+    if (store) {
+      return res.json(store);
+    }
+    else {
+      return res.status(404).send('Not Found');
+    }
   });
 };
 
 // Creates a new store in the DB.
 exports.create = function(req, res) {
-  Store.create(req.body, function(err, store) {
-    if(err) { return handleError(res, err); }
-    console.log(store);
-    return res.status(201).json(store);
+  User.findById(req.user._id, function(err,user) {
+    if (err) { return handleError(res, err); }
+    if (!user) { return res.send(404); }
+    user.stores.push(new Store(req.body));
+    user.save(function(){
+      return res.json(201, user.stores);
+    });
   });
 };
 
 // Updates an existing store in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Store.findById(req.params.id, function (err, store) {
+  User.findById(req.user._id, function(err, user) {
     if (err) { return handleError(res, err); }
-    if(!store) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(store, req.body);
-    updated.save(function (err) {
+    if (!user) { return res.send(404); }
+    var store = findStoreById(user, req.params.id);
+    _.merge(store, req.body.store);
+    user.save(function(err, saved) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(store);
     });
@@ -45,12 +62,17 @@ exports.update = function(req, res) {
 
 // Deletes a store from the DB.
 exports.destroy = function(req, res) {
-  Store.findById(req.params.id, function (err, store) {
-    if(err) { return handleError(res, err); }
-    if(!store) { return res.status(404).send('Not Found'); }
-    store.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.status(204).send('No Content');
+  User.findById(req.user._id, function(err, user) {
+    if (err) { return handleError(res, err); }
+    if (!user) { return res.send(404); }
+    var store = findStoreById(user, req.params.id);
+    if (store) {
+      user.stores.pull(store._id);
+    } else {
+      return res.send(404);
+    }
+    user.save(function() {
+      return res.json(200, user.stores);
     });
   });
 };
