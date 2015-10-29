@@ -8,7 +8,7 @@ function findStoreById(user, id) {
   return _.find(user.stores, function(store) {
     return store._id.equals(id);
   });
-};
+}
 
 // Get list of stores
 exports.index = function(req, res) {

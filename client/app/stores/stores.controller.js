@@ -30,19 +30,19 @@ angular.module('truthInGivingApp')
 
     $scope.add = function() {
       storeData = { label: $scope.newStoreLabel, amount: $scope.newStoreAmount, value: $scope.newStoreValue, color: getRandomColor() };
-      storesService.add(storeData).then(function(response) {
+      storesService.add(storeData).then(function() {
         $state.reload();
       });
     };
 
     $scope.update = function(store) {
-      storesService.update(store).then(function(response) {
+      storesService.update(store).then(function() {
         $scope.getAll();
       });
     };
 
     $scope.remove = function(store) {
-      storesService.remove(store).then(function(response) {
+      storesService.remove(store).then(function() {
         $scope.getAll();
         $state.reload();
       });
