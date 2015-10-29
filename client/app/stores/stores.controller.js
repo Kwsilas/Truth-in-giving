@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('truthInGivingApp')
-  .controller('StoresCtrl', function ($scope, storesService) {
+  .controller('StoresCtrl', function ($scope, $state, storesService) {
 
     $scope.stores = [];
+
+    var storeData = false;
 
     function getRandomColor() {
       var letters = '0123456789ABCDEF'.split('');
@@ -14,20 +16,22 @@ angular.module('truthInGivingApp')
       return color;
     }
 
+    var chartData = [];
+
     $scope.getAll = function() {
       storesService.getAll().then(function(response) {
         $scope.stores = response.data;
+        $scope.stores.forEach(function(obj) {
+          chartData.push({label: obj.label, value: obj.value, color: obj.color});
+        });
+        $scope.data = chartData;
       });
     };
 
     $scope.add = function() {
-      var store = { label: $scope.newStoreLabel, amount: $scope.newStoreAmount, value: $scope.newStoreValue, color: getRandomColor() };
-      storesService.add(store).then(function(response) {
-        console.log(store);
-        $scope.newStoreLabel = '';
-        $scope.newStoreAmount = '';
-        $scope.newStoreValue = '';
-        $scope.getAll();
+      storeData = { label: $scope.newStoreLabel, amount: $scope.newStoreAmount, value: $scope.newStoreValue, color: getRandomColor() };
+      storesService.add(storeData).then(function(response) {
+        $state.reload();
       });
     };
 
@@ -40,15 +44,11 @@ angular.module('truthInGivingApp')
     $scope.remove = function(store) {
       storesService.remove(store).then(function(response) {
         $scope.getAll();
+        $state.reload();
       });
     };
 
     $scope.getAll();
-
-    //set chart data to stores array info
-
-    $scope.data =
-
 
     //set chart layout options
     $scope.options = {

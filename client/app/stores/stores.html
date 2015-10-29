@@ -12,12 +12,15 @@
           <button type="submit" class="btn btn-primary" ng-click="add()">Add New</button>
         </label>
       </form>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="store in stores">
+        <li><tooltip="{{store.info}}">{{store.label}} Purchases: {{store.amount}}<button type="button" class="close" ng-click="remove(store)">&times;</button></a></li>
+      </ul>
     </div>
     <div class="col-sm-6">
     <h3>Where I shop</h3>
       <div ng-app="truthInGivingApp">
        <div ng-controller="StoresCtrl">
-          <canvas tc-chartjs-pie chart-options="options" chart-data="data" auto-legend></canvas>
+          <canvas tc-chartjs-pie chart-options="options" chart="chart" chart-data="data" auto-legend></canvas>
        </div>
       </div>
     </div>
