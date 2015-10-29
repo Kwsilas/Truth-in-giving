@@ -2,18 +2,19 @@
 
 <div class="container">
   <div class='row'>
-    <h3>Where I shop</h3>
+    <h3>Enter New Purchase</h3>
     <div class='col-sm-6'>
       <form>
         <label>
-          Store: <input type="text" ng-model="newStoreName" /><br/><br/>
+          Store: <input type="text" ng-model="newStoreLabel" /><br/><br/>
           Purchase Amount: <input type="number" ng-model="newStoreAmount" /><br/><br/>
-          Giving % : <input type="number" ng-model="newStoreGiving" /><br/><br/>
+          Giving % : <input type="number" ng-model="newStoreValue" /><br/><br/>
           <button type="submit" class="btn btn-primary" ng-click="add()">Add New</button>
         </label>
       </form>
     </div>
     <div class="col-sm-6">
+    <h3>Where I shop</h3>
       <div ng-app="truthInGivingApp">
        <div ng-controller="StoresCtrl">
           <canvas tc-chartjs-pie chart-options="options" chart-data="data" auto-legend></canvas>

@@ -5,6 +5,15 @@ angular.module('truthInGivingApp')
 
     $scope.stores = [];
 
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF'.split('');
+      var color = '#';
+      for (var i = 0; i < 6; i++ ) {
+          color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
     $scope.getAll = function() {
       storesService.getAll().then(function(response) {
         $scope.stores = response.data;
@@ -12,12 +21,12 @@ angular.module('truthInGivingApp')
     };
 
     $scope.add = function() {
-      var store = { name: $scope.newStoreName, amount: $scope.newStoreAmount, giving: $scope.newStoreGiving };
+      var store = { label: $scope.newStoreLabel, amount: $scope.newStoreAmount, value: $scope.newStoreValue, color: getRandomColor() };
       storesService.add(store).then(function(response) {
         console.log(store);
-        $scope.newStoreName = '';
+        $scope.newStoreLabel = '';
         $scope.newStoreAmount = '';
-        $scope.newStoreGiving = '';
+        $scope.newStoreValue = '';
         $scope.getAll();
       });
     };
@@ -37,26 +46,8 @@ angular.module('truthInGivingApp')
     $scope.getAll();
 
     //set chart data to stores array info
-    $scope.data = [
-      {
-        value: 300,
-        color:'#F7464A',
-        highlight: '#FF5A5E',
-        label: 'REI'
-      },
-      {
-        value: 50,
-        color: '#46BFBD',
-        highlight: '#5AD3D1',
-        label: 'Starbucks'
-      },
-      {
-        value: 100,
-        color: '#FDB45C',
-        highlight: '#FFC870',
-        label: 'WholeFoods'
-      }
-    ];
+
+    $scope.data =
 
 
     //set chart layout options

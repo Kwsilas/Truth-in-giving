@@ -4,9 +4,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var StoreSchema = new Schema({
-  name: String,
+  label: String,
   amount: Number,
-  giving: Number
+  value: Number,
+  color: String
 });
 
 module.exports = mongoose.model('Store', StoreSchema);
