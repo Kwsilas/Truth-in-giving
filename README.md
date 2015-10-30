@@ -8,7 +8,6 @@ The objective of this project is to:
 * Practice building MEAN stack apps that connect to a noSQL (mongoDB) database
 * Use RESTful routes
 * Implement CRUD (Create/Read/Update/Destroy) functionality in an app
-* Incorporate an authentication system
 
 ##LINKS
 
@@ -19,7 +18,6 @@ GitHub [Truth-in-Giving](https://github.com/Kwsilas/Truth-in-giving)
 ##TECHNOLOGY USED
 
 * HTML5
-* SASS
 * JavaScript
 * jQuery
 * Angularjs
