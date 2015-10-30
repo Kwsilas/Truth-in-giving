@@ -27,3 +27,4 @@ GitHub [My hikes](https://github.com/Kwsilas/Truth-in-giving)
 * Express
 
 ##MOCK-UPS
+https://github.com/Kwsilas/Truth-in-giving/blob/master/client/assets/images/TnGmockup.JPG
