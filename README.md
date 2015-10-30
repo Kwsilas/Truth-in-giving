@@ -14,7 +14,7 @@ The objective of this project is to:
 
 User storyboard: [Trello](https://trello.com/b/pbj6YNeu/truth-in-giving)
 Deploy app with: [Heroku](https://secret-wildwood-2755.herokuapp.com/)
-GitHub [My hikes](https://github.com/Kwsilas/Truth-in-giving)
+GitHub [Truth-in-Giving](https://github.com/Kwsilas/Truth-in-giving)
 
 ##TECHNOLOGY USED
 
